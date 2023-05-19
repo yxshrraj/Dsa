@@ -139,7 +139,7 @@ class Solution
           q.offer(new Pair(root,0));
           while(!q.isEmpty())
           {
-              Pair p= q.remove();
+              Pair p= q.poll();
               Node temp = p.node;
               int line= p.line;
               map.put(line,temp.data);
