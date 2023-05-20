@@ -113,10 +113,12 @@ class Tree {
         while (root != null) {
             if (root.data == key) {
                 ceil = root.data;
-                break;
-            } else if (root.data < key) {
+                return ceil;
+            }
+            if (key > root.data) {
                 root = root.right;
-            } else {
+            }
+            else {
                 ceil = root.data;  // Update ceil if the current node value is greater than key
                 root = root.left;
             }
