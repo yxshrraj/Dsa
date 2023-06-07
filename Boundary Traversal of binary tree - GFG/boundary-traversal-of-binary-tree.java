@@ -107,7 +107,6 @@ class GFG
 //     } 
 // }
 
-
 class Solution
 {
     static Boolean isLeaf(Node root)
