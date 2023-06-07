@@ -115,25 +115,23 @@ class Node{
 class Solution
 {
     //Function to return maximum path sum from any node in a tree.
-    int maxPath(Node root , int [] value)
+    int maxPathdown(Node node , int []maxval)
     {
-        if(root==null)
-           return 0;
-          
-         int left = Math.max(0,maxPath(root.left,value));
-         int right = Math.max(0,maxPath(root.right,value));
-         
-         value[0]=Math.max(value[0],left+right+root.data);
-         
-         return Math.max(left,right)+root.data;
+        if(node==null)
+         return 0;
+        
+        int left= Math.max(0,maxPathdown(node.left,maxval));
+        int right = Math.max(0,maxPathdown(node.right,maxval));
+        maxval[0]= Math.max(maxval[0], left+right+node.data);
+        
+        return Math.max(left,right)+node.data;
     }
+    
     int findMaxSum(Node node)
     {
-       
-        int [] value= new int[1];
-        value[0]= Integer.MIN_VALUE;
-        maxPath(node,value);
-        return value[0];
-        
+        int maxval[] = new int[1];
+        maxval[0]=Integer.MIN_VALUE;
+        maxPathdown(node,maxval);
+        return maxval[0];
     }
 }
