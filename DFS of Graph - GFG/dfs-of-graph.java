@@ -36,26 +36,32 @@ class GFG {
 
 class Solution {
     // Function to return a list containing the DFS traversal of the graph.
-    public void dfs(int node ,boolean vis [], ArrayList<ArrayList<Integer>> adj , ArrayList<Integer> list)
+    public void dfs(int node, boolean vis[] ,ArrayList<ArrayList<Integer>> adj,ArrayList<Integer> ans)
     {
         vis[node]=true;
-        list.add(node);
-        for(Integer it: adj.get(node))
+        ans.add(node);
+        for(Integer it : adj.get(node))
         {
             if(vis[it]==false)
+            
             {
-                dfs(it,vis, adj,list);
+                
+                dfs(it,vis,adj,ans);
             }
         }
     }
-    
     public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        ArrayList<Integer> ans= new ArrayList<>();
+        boolean vis[] =new boolean[V];
+        vis[0]=false;
         
-        ArrayList<Integer> list = new ArrayList<>();
-        boolean []vis= new boolean[V];
-        // vis[0]=true;
-        dfs(0 ,vis, adj ,list);
-        
-        return list;
+        for(int i=0 ;i<V;i++)
+        {
+            if(vis[i]==false)
+            {
+                dfs(i,vis,adj,ans);
+            }
+        }
+        return ans;
     }
 }
