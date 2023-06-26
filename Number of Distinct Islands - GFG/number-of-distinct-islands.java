@@ -35,12 +35,13 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    void dfs(int row, int col, int[][] vis, int[][] grid,ArrayList<String> arr,int row0 ,int col0) {
-       
+    void dfs(int row, int col, int[][] vis, int[][] grid, ArrayList<Integer> arr, int row0, int col0) {
         vis[row][col] = 1;
-        arr.add(toString(row-row0 ,col-col0));
-          int n= grid.length;
-          int m= grid[0].length;
+        arr.add(row - row0);
+        arr.add(col - col0);
+
+        int n = grid.length;
+        int m = grid[0].length;
         int[] dr = {-1, 1, 0, 0};
         int[] dc = {0, 0, -1, 1};
 
@@ -49,29 +50,32 @@ class Solution {
             int ncol = col + dc[i];
 
             if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && grid[nrow][ncol] == 1 && vis[nrow][ncol] == 0) {
-                dfs(nrow, ncol, vis, grid,arr,row0,col0);
+                dfs(nrow, ncol, vis, grid, arr, row0, col0);
             }
         }
     }
-     String toString(int r, int c) {
-    return Integer.toString(r) + " " + Integer.toString(c);
-  }
+
+    String toString(int r, int c) {
+        return Integer.toString(r) + " " + Integer.toString(c);
+    }
+
     int countDistinctIslands(int[][] grid) {
         int n = grid.length;
         int m = grid[0].length;
-        
+
         int[][] vis = new int[n][m];
-        HashSet<ArrayList<String>> st =new HashSet<>();
+        HashSet<ArrayList<Integer>> st = new HashSet<>();
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == 1 && vis[i][j] == 0) {
-                    ArrayList<String> arr = new ArrayList<>();
-                    dfs(i, j, vis, grid,arr,i,j);
+                    ArrayList<Integer> arr = new ArrayList<>();
+                    dfs(i, j, vis, grid, arr, i, j);
                     st.add(arr);
                 }
             }
         }
-        
+
         return st.size();
     }
 }
