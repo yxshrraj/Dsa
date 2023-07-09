@@ -115,11 +115,14 @@ class GfG {
 
 
 //User function Template for Java
-class Pair
-{
-    Node node ;
+
+
+//User function Template for Java
+class Pair{
+    Node node;
     int line;
-    public Pair(Node _node , int _line)
+    
+    Pair(Node _node , int _line)
     {
         node=_node;
         line=_line;
@@ -131,7 +134,7 @@ class Solution
     //Function to return a list containing the bottom view of the given tree.
     public ArrayList <Integer> bottomView(Node root)
     {
-        ArrayList<Integer> ans = new ArrayList<>();
+       ArrayList<Integer> ans = new ArrayList<>();
         if(root==null)
          return ans;
          Map<Integer,Integer> map = new TreeMap<>();
@@ -157,7 +160,7 @@ class Solution
             {
                  ans.add(entry.getValue());
              }
-              return ans;        
-    }
-         
+              return ans;     
+              
+}
 }
