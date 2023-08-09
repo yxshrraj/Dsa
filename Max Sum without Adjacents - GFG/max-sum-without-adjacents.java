@@ -31,42 +31,26 @@ public class Main {
 //User function Template for Java
 
 class Solution {
-    
-    //  int f(int ind , int arr[], int [] dp)
-    //  {
-         
-    //      if(ind==0) return arr[0];
-    //      if(ind< 0) return 0;
-    //      if(dp[ind]!=-1) return dp[ind];
-    //      int ans= 0;
-         
-    //      int take = f(ind-2 , arr,dp) +arr[ind];
-    //      int nottake = 0 +f(ind-1,arr,dp);
-    //      ans = Math.max(take,nottake);
-    //      dp[ind]=ans;
-    //      return dp[ind];
-         
-    //  }
+   
     int findMaxSum(int arr[], int n) {
         int [] dp =new int[n];
         Arrays.fill(dp,-1);
-        dp[0]= arr[0];
+       
+          dp[0]=arr[0];
           
-        
-        for(int i=1 ; i<n ;i++)
-        {
-              int take= arr[i] ;
-              if(i>1)
-              {
-                  take+=dp[i-2];
-                 
-              }
-               int nottake = 0+ dp[i-1];
+          for(int ind=1; ind<n; ind++)
+          {
+              int take =arr[ind];
+
+              if(ind>1)
+               take += dp[ind-2];
                
-            
-            dp[i]=Math.max(nottake,take);
-        }
-        return dp[n-1];
-    
+               
+               int nottake = 0+ dp[ind-1];
+               dp[ind]=Math.max(nottake,take);
+          }
+          
+          return dp[n-1];
+        
     }
 }
