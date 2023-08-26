@@ -100,24 +100,21 @@ class Solution
     //Function to find the data of nth node from the end of a linked list.
     int getNthFromLast(Node head, int n)
     {
-    	// Your code here	
-    	int c=0;
-    	Node temp=head ;
-    	while(temp!=null)
-    	{
-    	    c+=1;
-    	    temp=temp.next;
-    	}
-    	if(n>c) return -1;
-    	int len= c-n;
-    	int i=0;
-    	temp=head;
-    	while (i<len)
-    	{
-    	    ++i;
-    	    temp=temp.next;
-    	    
-    	}
-    	return temp.data;
+    	 	int count =0 ;
+    	 	Node temp =head;
+    	 	while(temp!=null)
+    	 	   {
+    	 	       count++;
+    	 	       temp=temp.next;        
+    	 	   }
+    	 	  if(n>count) return -1;
+    	 	 temp=head;
+    	 	 int diff= count-n;
+    	 	 while(diff>0)
+    	 	 {
+    	 	     temp=temp.next;
+    	 	     diff--;
+    	 	 }
+    	 	 return temp.data;
     }
 }
