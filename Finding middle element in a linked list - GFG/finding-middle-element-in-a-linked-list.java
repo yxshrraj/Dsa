@@ -58,21 +58,35 @@ class Solution
 {
     int getMiddle(Node head)
     {
-         Node temp =head;
-         int c=0;
-         while(temp!=null)
-         {
-             c++;
-             temp= temp.next;
-             
+         // Your code here
+        Node slow=head;
+        Node fast=head;
+        while(fast!=null && fast.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow.data;
+        
+        
          }
-         temp=head;
-         int l=c/2;
-         while(l>0)
-         {
-             temp=temp.next;
-             l--;
-         }
-         return temp.data;
-    }
 }
+
+
+// 1   -   2   -  3  -    4   -     5
+// s       s      s                  f
+// f
+
+
+
+
+
+// slow   fast ;
+
+// fast covers double distance as compared to slow ;
+
+
+// slow=slow.next;
+//  l/2;
+// fast=fast.next.nextl
+
