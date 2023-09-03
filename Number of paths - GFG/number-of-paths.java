@@ -26,16 +26,25 @@ class GfG {
 
 class Solution{
     
+    long countpaths(int i, int j , int m ,int n,long [][]dp)
+    {
+        if(i==m-1 && j==n-1) return 1;
+        if(i>=m || j>=n) return 0;
+        if(dp[i][j]!=-1) return dp[i][j];
+        
+        return dp[i][j]=countpaths(i,j+1,m,n,dp)+countpaths(i+1,j,m,n,dp);
+    }
+    
+    
     long numberOfPaths(int m, int n) {
         // Code Here
-        int N= m+n-2;
-        int r= m-1;
-        long res=1;
-        for(int i=1 ; i<=r ;i++)
+        long [][]dp =new long[m][n];
+        for(long row[]:dp)
         {
-            res=res*(N-r+i)/i;
+            Arrays.fill(row,-1);
         }
-        return res;
+        return countpaths(0,0,m,n,dp);
+        
     }
     
 }
