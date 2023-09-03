@@ -35,27 +35,29 @@ class GFG {
 
 class Solution {
    static int mod=1000000007;
-    static int func(int i ,int j,int [][]grid,int [][]dp)
-    {
-        if(i>=0 && j>=0 && grid[i][j]==0) return 0;
-        if(i==0 && j==0) return 1;
-        if(i<0 || j<0) return 0;
-        if(dp[i][j]!=-1) return dp[i][j];
-        
-        int up= func(i-1,j,grid,dp);
-        int left= func(i,j-1,grid,dp);
-        
-        return dp[i][j]= (up+left)%mod;
-    }
     
     static int uniquePaths(int n, int m, int[][] grid) {
         // code here
         int [][]dp= new int[n][m];
-        for(int row[]:dp)
-        {
-            Arrays.fill(row,-1);
-        }
-        return func(n-1,m-1,grid,dp);
         
+        for(int i=0; i<n ;i++)
+        {
+            for(int j=0; j<m;j++)
+            {
+                if( grid[i][j]==0) dp[i][j]=0;
+               else if(i==0 && j==0) dp[i][j]=1;
+                else
+                {
+                int up=0, left=0;
+                if(i>0) up=dp[i-1][j];
+                if(j>0) left= dp[i][j-1];
+                
+                dp[i][j]=(up+left)%mod;
+                }
+                    
+                }
+            
+        }
+        return dp[n-1][m-1];
     }
 };
