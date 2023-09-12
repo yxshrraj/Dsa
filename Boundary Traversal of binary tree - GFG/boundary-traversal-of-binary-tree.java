@@ -109,54 +109,79 @@ class GFG
 
 class Solution
 {
-    static Boolean isLeaf(Node root)
+    public boolean isLeaf(Node root)
     {
-        return (root.left==null) && (root.right==null);
-    }
-    void addLeftBoundary(Node root , ArrayList<Integer> res)
-    {
-        Node cur = root.left;
-        while(cur!=null)
+        if(root.left==null && root.right==null)
         {
-        if(isLeaf(cur)==false) res.add(cur.data);
-        if(cur.left!=null) cur=cur.left;
-        else cur=cur.right;
+            return true;
         }
+        return false;
     }
-    void addRightBoundary(Node root , ArrayList<Integer> res)
+    public void leftree(Node root, ArrayList<Integer> ans)
     {
-        Node cur= root.right;
-        ArrayList<Integer> tmp = new ArrayList<Integer>();
-        while(cur!=null)
+        
+        Node temp=root.left;
+        while(temp!=null)
         {
-            if(isLeaf(cur)==false) tmp.add(cur.data);
-            if(cur.right!=null) cur=cur.right;
+            if(isLeaf(temp)==false) ans.add(temp.data);
+            if(temp.left!=null)
+            {
+                  temp=temp.left;
+            }
             else
-             cur=cur.left;
-        }
-        int i;
-        for(i=tmp.size()-1 ; i>=0;--i)
-        {
-            res.add(tmp.get(i));
+            {
+                temp=temp.right;
+            }
+          
         }
     }
-    void addLeaves(Node root , ArrayList<Integer> res)
+    public void leafnode(Node root,ArrayList<Integer> ans)
     {
         if(isLeaf(root))
         {
-         res.add(root.data);
-         return;
+            ans.add(root.data);
+            
         }
-        if(root.left!=null) addLeaves(root.left,res);
-        if(root.right!=null) addLeaves(root.right,res);
+        if(root.left!=null) leafnode(root.left,ans);
+        if(root.right!=null) leafnode(root.right,ans);
+    }
+    public void rightree(Node root, ArrayList<Integer> ans)
+    {
+        Node temp=root.right;
+        ArrayList<Integer> tmp= new ArrayList<>();
+        while(temp!=null)
+        {
+           if(isLeaf(temp)==false) tmp.add(temp.data);
+          if(temp.right!=null) temp=temp.right;
+          else
+          {
+                 temp=temp.left;
+          }
+        }
+        for(int i=tmp.size()-1; i>=0;--i)
+        {
+            ans.add(tmp.get(i));
+        }
+        
+        
+           
+        
     }
 	ArrayList <Integer> boundary(Node node)
 	{
-	     ArrayList<Integer> ans = new ArrayList<Integer>();
-	     if(isLeaf(node)==false) ans.add(node.data);
-	     addLeftBoundary(node,ans);
-	     addLeaves(node,ans);
-	     addRightBoundary(node, ans);
-	     return ans; 
+	    ArrayList<Integer> ans = new ArrayList<>();
+	    if(isLeaf(node)==false) ans.add(node.data);
+	    leftree(node,ans);
+	    leafnode(node,ans);
+	    rightree(node,ans);
+	    
+	    return ans;
 	}
 }
+
+
+// Left traversal of the tree - > 1 2 
+// Leaf Node traversal -> 4 8 9 6 7 
+// Right Node traversal ->  3 x(1)
+
+// 1 2 4 8 9 6 7 33
