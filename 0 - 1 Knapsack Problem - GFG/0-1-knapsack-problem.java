@@ -49,39 +49,53 @@ class gfg
 class Solution 
 { 
     //Function to return max value that can be put in knapsack of capacity W.
-    static int func(int ind, int wt[], int val[], int W , int [][]dp)
-    {
-        if(ind==0)
-        {
-            if(wt[0]<=W)
-            {
-                return val[0];
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        if(dp[ind][W]!=-1) return dp[ind][W];
+    // static int func(int ind, int wt[], int val[], int W , int [][]dp)
+    // {
+    //     if(ind==0)
+    //     {
+    //         if(wt[0]<=W)
+    //         {
+    //             return val[0];
+    //         }
+    //         else
+    //         {
+    //             return 0;
+    //         }
+    //     }
+    //     if(dp[ind][W]!=-1) return dp[ind][W];
         
         
-        int pick= Integer.MIN_VALUE;
-        if(wt[ind]<=W)
-        {
-            pick= val[ind]+ func(ind-1,wt,val,W-wt[ind],dp);
-        }
-        int notpick= 0+ func(ind-1,wt,val,W,dp);
-        return dp[ind][W]= Math.max(pick,notpick);
-    }
+    //     int pick= Integer.MIN_VALUE;
+    //     if(wt[ind]<=W)
+    //     {
+    //         pick= val[ind]+ func(ind-1,wt,val,W-wt[ind],dp);
+    //     }
+    //     int notpick= 0+ func(ind-1,wt,val,W,dp);
+    //     return dp[ind][W]= Math.max(pick,notpick);
+    // }
     static int knapSack(int W, int wt[], int val[], int n) 
     { 
          // your code here 
          int dp[][]= new int[n][W+1];
-         for(int row[]:dp)
+        
+         for(int i= wt[0] ; i<=W ;i++)
          {
-             Arrays.fill(row,-1);
+             dp[0][i]=val[0];
          }
-         return func(n-1,wt,val,W,dp);
+         for(int ind=1; ind<n ;ind++)
+         {
+             for(int w=0; w<=W; w++)
+             {
+                 int notake= 0+ dp[ind-1][w];
+                 int take= Integer.MIN_VALUE;
+                 if(wt[ind]<=w)
+                 {
+                     take= val[ind]+ dp[ind-1][w-wt[ind]];
+                 }
+                 dp[ind][w]=Math.max(take,notake);
+             }
+         }
+         return dp[n-1][W];
          
     } 
 }
