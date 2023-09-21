@@ -49,54 +49,40 @@ class gfg
 class Solution 
 { 
     //Function to return max value that can be put in knapsack of capacity W.
-    
-    // static int ks ( int []wt , int val[],int ind ,int W, int [][]dp)
-    // {
-    //     if(ind==0)
-    //     {
-    //         if(wt[0]<=W) return val[0];
-    //         else
-    //           return 0;
-    //     }
-    //     if(dp[ind][W]!=-1)
-    //     {
-    //         return dp[ind][W];
-    //     }
-    //     int notTaken = 0+ ks(wt,val,ind-1,W,dp);
-    //     int taken= Integer.MIN_VALUE;
-        
-    //     if(wt[ind]<=W)
-    //     {
-    //         taken= val[ind]+ks(wt,val,ind-1,W-wt[ind],dp);
-    //     }
-    //     return dp[ind][W]= Math.max(notTaken,taken);
+    static int func(int ind, int wt[], int val[], int W , int [][]dp)
+    {
+        if(ind==0)
+        {
+            if(wt[0]<=W)
+            {
+                return val[0];
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        if(dp[ind][W]!=-1) return dp[ind][W];
         
         
-    // }
-    
+        int pick= Integer.MIN_VALUE;
+        if(wt[ind]<=W)
+        {
+            pick= val[ind]+ func(ind-1,wt,val,W-wt[ind],dp);
+        }
+        int notpick= 0+ func(ind-1,wt,val,W,dp);
+        return dp[ind][W]= Math.max(pick,notpick);
+    }
     static int knapSack(int W, int wt[], int val[], int n) 
     { 
-       
-       int dp[][] = new int[n][W+1];
-      for(int i=wt[0]; i<=W;i++)       
-      {
-          dp[0][i]=val[0];
-      }
-      for(int ind=1; ind<n;ind++)
-       {
-           for(int j=0; j<=W;j++)
-           {
-               int nottake= dp[ind-1][j];
-               int take= Integer.MIN_VALUE;
-               if(wt[ind]<=j)
-               {
-                   take= val[ind]+ dp[ind-1][j-wt[ind]];
-               }
-               dp[ind][j]=Math.max(nottake ,take);
-           }
-       }
-       return dp[n-1][W];
-                
+         // your code here 
+         int dp[][]= new int[n][W+1];
+         for(int row[]:dp)
+         {
+             Arrays.fill(row,-1);
+         }
+         return func(n-1,wt,val,W,dp);
+         
     } 
 }
 
