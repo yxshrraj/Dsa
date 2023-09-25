@@ -123,24 +123,22 @@ class Node
 class Tree
 {
     //Function to return list containing elements of left view of binary tree.
-    public void leftsideview(Node curr , ArrayList<Integer>ans, int currDepth)
+    public void dfs(Node root, ArrayList<Integer> ans, int level)
     {
-        if(curr==null)
-          return;
-          
-         if(currDepth==ans.size())
-           {
-               ans.add(curr.data);
-               
-           }
-          leftsideview(curr.left,ans,currDepth+1);
-          leftsideview(curr.right,ans,currDepth+1);
+        if(root==null) return;
+        if(level==ans.size())
+        {
+            ans.add(root.data);
+        }
+        
+        dfs(root.left,ans,level+1);
+        dfs(root.right,ans,level+1);
     }
     ArrayList<Integer> leftView(Node root)
     {
-          ArrayList<Integer> arr = new ArrayList<>();
-          leftsideview(root,arr,0);
-          return arr;
-          
+      // Your code here
+      ArrayList<Integer> ans = new ArrayList<>();
+      dfs(root,ans,0);
+      return ans;
     }
 }
