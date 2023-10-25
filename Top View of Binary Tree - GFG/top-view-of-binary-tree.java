@@ -125,14 +125,12 @@ class Node{
 */
 class Pair
 {
-    Node node ;
-    int line;
-    
-    public Pair(Node _node, int _line)
-     {
-         node=_node;
-         line=_line;
-     }
+    Node root;
+    int hd;
+    Pair(Node _root , int _hd){
+        root=_root;
+        hd=_hd;
+    }
 }
 class Solution
 {
@@ -140,21 +138,22 @@ class Solution
     //from left to right in Binary Tree.
     static ArrayList<Integer> topView(Node root)
     {
-       ArrayList<Integer> arr =new ArrayList<>();
-       Queue<Pair> q = new LinkedList<>();
-       TreeMap<Integer,Integer> map = new TreeMap<>();
-       q.offer(new Pair(root,0));
-       
-       
-       while(!q.isEmpty())
-       {
-           Pair p =q.poll();
-           Node temp =p.node;
-           int line=p.line;
-           
-           if(map.get(line)==null)
-            map.put(line,temp.data);
-            
+        // add your code
+        ArrayList<Integer> ans = new ArrayList<>();
+        Queue<Pair> q= new LinkedList<Pair>();
+        TreeMap<Integer,Integer> mp = new TreeMap<Integer,Integer>();
+        if(root==null) return ans;
+        q.offer(new Pair(root,0));
+        
+        while(!q.isEmpty())
+        {
+            Pair p =q.poll();
+            Node temp= p.root;
+            int line= p.hd;
+            if(mp.get(line)==null) 
+            {
+                mp.put(line,temp.data);
+            }
             if(temp.left!=null)
             {
                 q.offer(new Pair(temp.left,line-1));
@@ -163,13 +162,15 @@ class Solution
             {
                 q.offer(new Pair(temp.right,line+1));
             }
-            
-            
-       }
-       for(Map.Entry<Integer,Integer> entry : map.entrySet())
-       {
-           arr.add(entry.getValue());
-       }
-        return arr;
+        }
+        for(Map.Entry<Integer,Integer> entry : mp.entrySet())
+        {
+            ans.add(entry.getValue());
+        }
+        return ans;
+        
     }
 }
+
+
+
