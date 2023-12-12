@@ -123,22 +123,21 @@ class Node
 class Tree
 {
     //Function to return list containing elements of left view of binary tree.
-    public void dfs(Node root, ArrayList<Integer> ans, int level)
+    void func(ArrayList<Integer> ans ,Node root, int depth)
     {
         if(root==null) return;
-        if(level==ans.size())
+        if(ans.size()==depth)
         {
             ans.add(root.data);
         }
-        
-        dfs(root.left,ans,level+1);
-        dfs(root.right,ans,level+1);
+        func(ans,root.left,depth+1);
+        func(ans,root.right,depth+1);
     }
     ArrayList<Integer> leftView(Node root)
     {
       // Your code here
-      ArrayList<Integer> ans = new ArrayList<>();
-      dfs(root,ans,0);
+      ArrayList<Integer> ans= new ArrayList<Integer>();
+      func(ans,root,0);
       return ans;
     }
 }
